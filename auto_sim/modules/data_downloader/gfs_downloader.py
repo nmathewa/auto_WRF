@@ -27,7 +27,7 @@ class GFSDownloader:
 
         total_forecast = forecast_days * 24
 
-        out_main = dft['files'].astype(str)
+        out_main = dft['files']
 
         times = np.arange(0,total_forecast+1,1)
         times = [str(x).zfill(3) for x in times]
@@ -39,8 +39,7 @@ class GFSDownloader:
         bottomlat = '0'
         date_str = date#'20230622'
         
-        save_dir = out_main + 'gfs_data/'
-        
+
 
         all_urls = []
         filename = []
@@ -56,11 +55,12 @@ class GFSDownloader:
 
         
             filename += ["gfs.t00z.pgrb2.0p25."+forec_lead+".grb2"]
-            save_dir += 
 
+        
         gfs = pd.DataFrame()
         gfs['url'] = all_urls
         gfs['filename'] = filename
+        gfs['save_path'] = out_main + 'gfs_'+ date_str +'/'
 
         return gfs
 
@@ -68,7 +68,7 @@ class GFSDownloader:
     def download_data(self,data_dft):
         url = data_dft['url']
         filename = data_dft['filename']
-
+        save_path = data_dft['save_path']
         #req.urlretrieve(url,filename)
         #os.system('wget ' + url + ' -O ' + filename)
         subprocess.call(['wget',url,'-O',filename])
@@ -81,11 +81,11 @@ class GFSDownloader:
 
         data_dft = dft.apply(self.get_nomad_url,axis=1)
 
-        data_dft_sub =data_dft[0]
+        data_dft_sub =data_dft[1]
 
-        #data_dft_sub.apply(self.download_data,axis=1)
+        data_dft_sub.apply(self.download_data,axis=1)
 
-        self.download_data(data_dft_sub.iloc[0])
+        #self.download_data(data_dft_sub)
 
         #print(data_dft_sub.iloc[0]['url'])
         

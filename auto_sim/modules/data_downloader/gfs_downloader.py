@@ -7,18 +7,27 @@ import subprocess
 class GFSDownloader:
 
     def __init__(self,domain_fol):
+
+        """
+        Set all required information for downloading GFS data
+        """
+        self.domain_fol = domain_fol
         dft = pd.read_csv(domain_fol + 'sim_dft.csv')
         os.chdir(domain_fol)
         dft['wps_namelist'] = dft['files'].astype(str) +  'namelist.wps'
         dft['wrf_namelist'] = dft['files'].astype(str) +  'namelist.input'
         dft['date'] = pd.to_datetime(dft['date'])
-    
+        
         
         self.locations = dft['locations'].astype(str)
         self.dft = dft
 
+
     def get_nomad_url(self,dft):
         
+        """
+        This function will return the url for downloading GFS data from nomad server
+        """
         
 
         date = dft['date'].strftime('%Y%m%d')
@@ -32,6 +41,9 @@ class GFSDownloader:
         times = np.arange(0,total_forecast+1,1)
         times = [str(x).zfill(3) for x in times]
 
+        """
+        This part should be from the user input dataframe
+        """
 
         leftlon = '60'
         rightlon = '100'
@@ -62,6 +74,10 @@ class GFSDownloader:
         gfs['filename'] = filename
         gfs['save_path'] = out_main +os.sep+ 'gfs_'+ date_str +'/'
 
+        if not os.path.exists(gfs['save_path'].iloc[0]):
+            os.makedirs(gfs['save_path'].iloc[0])
+        
+
         return gfs
 
 
@@ -74,13 +90,14 @@ class GFSDownloader:
         #req.urlretrieve(url,filename)
         #os.system('wget ' + url + ' -O ' + filename)
 
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
-        
-        
-        os.chdir(save_path)
+        full_path = save_path + filename
 
-        subprocess.call(['wget',url,'-O',filename])
+        
+        
+        
+        os.chdir(self.domain_fol)
+        subprocess.call(['wget',url,'-O',full_path])
+        
 
     def download_gfs(self):
 
@@ -90,13 +107,20 @@ class GFSDownloader:
 
         data_dft = dft.apply(self.get_nomad_url,axis=1)
 
+        
+
+        
+        
+
         data_dft_sub =data_dft[0]
 
+        
+        
+        
         data_dft_sub.apply(self.download_data,axis=1)
 
         #self.download_data(data_dft_sub)
 
-        #print(data_dft_sub.iloc[0]['url'])
         
 
 

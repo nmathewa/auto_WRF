@@ -96,6 +96,23 @@ class simsetup():
         wps_configs = dft.apply(self.get_wps_time,axis=1)
         wrf_configs = dft.apply(self.get_wrf_time,axis=1)
 
+        n_file = '/home/nma/GIT/auto_WRF/auto_sim/modules/files/Thrissur/bk/tttt.wps'
+        def edit_save(dft,out_file):
+            spacing = "\t\t\t     "
+            col_names = dft.index
+            for ii in col_names:
+                print(ii)
+                with open(out_file, "r") as sources:
+                    namelist_comps = sources.read()
+                new_text = ii + spacing + '= change,change,change'
+                replaced_text = re.sub(pattern=ii+'.*',repl = new_text,string=namelist_comps)
+                with open(out_file, "w") as text_file:
+                    text_file.write(replaced_text)
+
+        #edit_save(wps_configs.loc['Thrissur'],n_file)
+        wps_configs.apply(edit_save,axis=1,out_file=n_file)
+        
+        
         
 
         return wrf_configs

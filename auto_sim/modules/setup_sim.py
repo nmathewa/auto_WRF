@@ -22,6 +22,9 @@ class simsetup():
         self.dft = dft
         self.locations = dft['locations'].astype(str)
 
+    def get_locations(self):
+        return self.dft
+
     def get_wps_time(self,dft):
 
         date = dft['date']
@@ -126,7 +129,7 @@ class simsetup():
 
 
 
-print(simsetup('/home/nma/GIT/auto_WRF/auto_sim/modules/files/').edit_namelist())
+#print(simsetup('/home/nma/GIT/auto_WRF/auto_sim/modules/files/').edit_namelist())
 
 
 

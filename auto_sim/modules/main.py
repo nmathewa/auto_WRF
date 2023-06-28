@@ -1,15 +1,27 @@
 import typer
 from data_downloader.gfs_downloader import GFSDownloader
+from setup_sim import simsetup
 from typing_extensions import Annotated
 
 app = typer.Typer(rich_markup_mode="markdown")
+
+
+
+@app.command()
+def get_loc():
+    
+    print(simsetup('/home/nma/GIT/auto_WRF/auto_sim/modules/files/').get_locations())
+
+
+
 
 
 @app.command()
 def download_data(data_type : Annotated[str, typer.Argument(help="Dataset to download. Choose between gfs and era5")]):
     """
     This command will download the data from nomad server. It will download the data based on the user input dataframe.:
-    **run** the get-loc command to get the location of the data.
+    
+    * **run** the get-loc command to get the location of the data.
 
     * Only GFS and ERA5 data are supported
 

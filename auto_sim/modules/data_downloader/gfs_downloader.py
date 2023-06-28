@@ -138,4 +138,4 @@ class GFSDownloader:
         
 
 
-GFSDownloader('/home/nma/GIT/auto_WRF/auto_sim/modules/files/').download_gfs()
+#GFSDownloader('/home/nma/GIT/auto_WRF/auto_sim/modules/files/').download_gfs()

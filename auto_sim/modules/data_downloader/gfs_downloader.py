@@ -3,8 +3,22 @@ import os
 import numpy as np
 import urllib.request as req
 import subprocess
+import argparse 
+
+
+
 
 class GFSDownloader:
+    """
+
+    This class is used to download GFS data from nomad server. It will download the data for the specified domain and time.
+    
+
+    """
+
+    # add command line arguments
+   
+
 
     def __init__(self,domain_fol):
 

@@ -121,7 +121,6 @@ class GFSDownloader:
 
         data_dft = dft.apply(self.get_nomad_url,axis=1)
 
-        
 
         
         
@@ -134,8 +133,8 @@ class GFSDownloader:
         data_dft_sub.apply(self.download_data,axis=1)
 
         #self.download_data(data_dft_sub)
-
+        
         
 
 
-#GFSDownloader('/home/nma/GIT/auto_WRF/auto_sim/modules/files/').download_gfs()
+#GFSDownloader('/home/nmathewa/main/GIT/auto_WRF/auto_sim/modules/files/').download_gfs()

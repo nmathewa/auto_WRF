@@ -47,8 +47,10 @@ class GFSDownloader:
         date = dft['date'].strftime('%Y%m%d')
 
         forecast_days = dft['forecast (days)']
-
-        total_forecast = forecast_days * 24
+        
+        #for 6 hourly file (one file for 6 hour data which has hourly data in it)
+        total_forecast = forecast_days * 4
+        
 
         out_main = dft['files'].split('/')[1]
 
@@ -59,10 +61,10 @@ class GFSDownloader:
         This part should be from the user input dataframe
         """
 
-        leftlon = '60'
-        rightlon = '100'
-        toplat = '40'
-        bottomlat = '0'
+        leftlon = '-88'
+        rightlon = '-65'
+        toplat = '34'
+        bottomlat = '20'
         date_str = date#'20230622'
         
 

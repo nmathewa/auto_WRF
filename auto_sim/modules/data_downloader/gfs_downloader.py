@@ -48,8 +48,8 @@ class GFSDownloader:
 
         forecast_days = dft['forecast (days)']
         
-        #for 6 hourly file (one file for 6 hour data which has hourly data in it)
-        total_forecast = forecast_days * 4
+        #for 1 hourly file (one file for 1 hour data which has hourly data in it)
+        total_forecast = forecast_days * 24
         
 
         out_main = dft['files'].split('/')[1]

@@ -18,8 +18,7 @@ In this step if you are on debian based repos free to use the following command 
 
 ```bash
 
-sudo apt-get install libnetcdf-dev libnetcdff-dev libjasper-dev libpng-dev libgrib-api-dev libhdf5-dev libopenmpi-dev
-
+sudo apt-get install -y build-essential csh gfortran m4 curl perl mpich libhdf5-mpich-dev libpng-dev netcdf-bin libnetcdff-dev
 ```
 
 > it is highly recommended to make a custom bash enviornment as in the auto script
@@ -29,7 +28,22 @@ sudo apt-get install libnetcdf-dev libnetcdff-dev libjasper-dev libpng-dev libgr
 
 ```bash
 
+touch wrf.bash
+
+code wr.bash
+
 ```
+# 1.2.2 installing zlib 
+
+```bash
+wget https://www.zlib.net/fossils/zlib-1.3.tar.gz
+tar -xzvf zlib-1.3.tar.gz
+cd zlib-1.3
+mkdir build
+
+
+```
+
 
 ### 1.2.2. Installing HDF5
 
@@ -52,7 +66,7 @@ make install
 ```
 
 
-### 1.2.3. Installing NETCDF
+### 1.2.3. Installing NETCDF-C
 
 ```bash
 
@@ -64,7 +78,7 @@ cd netcdf-c-4.9.2
 
 mkdir build
 
-./configure --prefix=$PWD/build --disable-dap --disable-netcdf-4 --disable-shared
+./configure --prefix=$wrf_libs/netcdf-c --disable-dap --enable-netcdf-4 --enable-netcdf4 --enable-shared --enable-static --enable-pnetcdf --enable-cdf5 --enable-parallel-tests
 
 make -j 4
 
@@ -97,6 +111,24 @@ make install
 
 
 
+## 1.2.5 Installing WPS 
 
+
+```bash
+
+cp Config.pl Config.pl_backup
+
+
+```
+
+wget -c https://github.com/madler/zlib/releases/download/v$Zlib_Version/zlib-$Zlib_Version.tar.gz
+wget -c https://github.com/HDFGroup/hdf5/releases/download/hdf5_$HDF5_Version.$HDF5_Sub_Version/hdf5-$HDF5_Version-$HDF5_Sub_Version.tar.gz
+wget -c https://github.com/Unidata/netcdf-c/archive/refs/tags/v$Netcdf_C_Version.tar.gz
+wget -c https://github.com/Unidata/netcdf-fortran/archive/refs/tags/v$Netcdf_Fortran_Version.tar.gz
+wget -c https://download.sourceforge.net/libpng/libpng-$Libpng_Version.tar.gz
+wget -c https://www.ece.uvic.ca/~frodo/jasper/software/jasper-$Jasper_Version.zip
+wget -c https://github.com/pmodels/mpich/releases/download/v$Mpich_Version/mpich-$Mpich_Version.tar.gz
+wget -c  https://parallel-netcdf.github.io/Release/pnetcdf-$Pnetcdf_Version.tar.gz
+    
 
 

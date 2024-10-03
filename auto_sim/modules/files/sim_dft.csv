@@ -1,2 +1,2 @@
-locations,date,hour,forecast (days),files
-Brevard,2023-09-07,23,3,files/Brevard/
+locations,date,hour,forecast (days),files,lat,lon
+Brevard,2024-10-03,12,3,files/Brevard/,28.06,-80.65

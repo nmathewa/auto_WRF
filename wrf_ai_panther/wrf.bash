@@ -1,0 +1,9 @@
+export CC=gcc
+export CXX=g++
+export FC=gfortran
+export F77=gfortran
+export FFLAGS=-m64
+export NETCDF=/usr
+export HDF5=/usr
+export LDFLAGS=-L/usr/lib
+export CPPFLAGS=-I/usr/include

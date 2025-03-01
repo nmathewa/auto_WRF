@@ -1,5 +1,7 @@
 # Auto WRF
 
+[![pages-build-deployment](https://github.com/nmathewa/auto_WRF/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages&event=deployment_status)](https://github.com/nmathewa/auto_WRF/actions/workflows/pages/pages-build-deployment)
+
 ## 1. installation 
 
 - 64 bit operating system  (32 bit is not supported)

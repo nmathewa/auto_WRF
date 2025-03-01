@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import GFSDataDownloader from './components/GFSDataDownloader';
+import ERA5DataDownloader from './components/ERA5DataDownloader';
 import Home from './components/Home';
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
               <li>
                 <Link to="/gfs-data-downloader">GFS Data Downloader</Link>
               </li>
+              <li>
+                <Link to="/era5-data-downloader">ERA5 Data Downloader</Link>
+              </li>
             </ul>
           </nav>
         </header>
@@ -25,10 +29,11 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/gfs-data-downloader" element={<GFSDataDownloader />} />
+            <Route path="/era5-data-downloader" element={<ERA5DataDownloader />} />
           </Routes>
         </main>
         <footer>
-          <img src="https://www.noaa.gov/sites/default/files/2022-03/noaa_emblem_logo-2022.png" alt="Logo" className="Footer-logo" />
+          <img src="https://example.com/your-logo-image.jpg" alt="Logo" className="Footer-logo" />
           <p>© {new Date().getFullYear()} - NOAA GFS Data Downloader</p>
         </footer>
       </div>

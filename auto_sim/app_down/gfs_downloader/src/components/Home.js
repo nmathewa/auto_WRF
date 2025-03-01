@@ -17,6 +17,11 @@ function Home() {
             <p>Access and download NOAA GFS forecast data.</p>
             <Link to="/gfs-data-downloader" className="card-link">Go to GFS Data Downloader</Link>
           </div>
+          <div className="card">
+            <h4>ERA5 Data Downloader</h4>
+            <p>Access and download ERA5 reanalysis data.</p>
+            <Link to="/era5-data-downloader" className="card-link">Go to ERA5 Data Downloader</Link>
+          </div>
         </div>
       </div>
     </div>

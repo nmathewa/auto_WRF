@@ -1,0 +1,15 @@
+
+.era5-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .era5-container h2 {
+    color: #4285f4;
+    margin-bottom: 10px;
+  }
+  
+  .era5-container p {
+    color: #333;
+    font-size: 1.2em;
+  }

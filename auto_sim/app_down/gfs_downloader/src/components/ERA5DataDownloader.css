@@ -21,6 +21,13 @@
     align-items: center;
   }
   
+  .selected-point {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
   .north, .south {
     margin: 10px 0;
   }
@@ -37,4 +44,46 @@
   
   .east {
     margin-left: auto;
+  }
+  
+  .selectors {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .component-selector, .time-resolution-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .component-selector label, .time-resolution-selector label {
+    margin-bottom: 10px;
+  }
+  
+  .component-selector select, .time-resolution-selector select {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .component-details {
+    margin-top: 20px;
+  }
+  
+  .component-details h3 {
+    margin-bottom: 10px;
+  }
+  
+  .component-details p {
+    margin: 5px 0;
+  }
+  
+  .custom-marker {
+    background-color: red;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    display: block;
   }

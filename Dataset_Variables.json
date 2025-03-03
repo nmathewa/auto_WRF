@@ -1,0 +1,5 @@
+{
+  "ERA5": ["temperature", "humidity", "precipitation"],
+  "ERA5-LAND": ["wind", "pressure"],
+  "ERA6": ["radiation"]
+}

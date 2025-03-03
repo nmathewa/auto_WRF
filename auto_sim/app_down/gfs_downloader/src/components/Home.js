@@ -22,6 +22,11 @@ function Home() {
             <p>Access and download ERA5 reanalysis data.</p>
             <Link to="/era5-data-downloader" className="card-link">Go to ERA5 Data Downloader</Link>
           </div>
+          <div className="card">
+            <h4>Running Index Calculator</h4>
+            <p>Calculate running index for various datasets.</p>
+            <Link to="/running-index-calculator" className="card-link">Go to Running Index Calculator</Link>
+          </div>
         </div>
       </div>
     </div>

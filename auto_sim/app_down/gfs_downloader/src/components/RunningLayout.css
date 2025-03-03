@@ -1,0 +1,22 @@
+.running-layout {
+    padding: 20px;
+  }
+  
+  .input-container {
+    margin-bottom: 20px;
+  }
+  
+  .input-container label {
+    margin-right: 10px;
+  }
+  
+  .input-container input {
+    margin-left: 5px;
+    padding: 5px;
+  }
+  
+  .chart-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }

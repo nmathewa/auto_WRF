@@ -11,6 +11,10 @@ function ERA5DataDownloader() {
   const [selectedTimeResolution, setSelectedTimeResolution] = useState('hourly');
   const [selectedPoint, setSelectedPoint] = useState(null);
   const [marker, setMarker] = useState(null);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [selectedVariables, setSelectedVariables] = useState([]);
+  const [variables, setVariables] = useState({});
 
   const components = {
     ERA5: {
@@ -31,7 +35,13 @@ function ERA5DataDownloader() {
   };
 
   useEffect(() => {
-    // Check if the map is already initialized
+    fetch('./Dataset_Variables.json')
+      .then(response => response.json())
+      .then(data => setVariables(data))
+      .catch(error => console.error('Error fetching the JSON file:', error));
+  }, []);
+
+  useEffect(() => {
     if (!document.getElementById('map')._leaflet_id) {
       const map = L.map('map').setView([51.505, -0.09], 2);
 
@@ -39,15 +49,11 @@ function ERA5DataDownloader() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
 
-      // Initialize the FeatureGroup to store editable layers
       const drawnItems = new L.FeatureGroup();
       map.addLayer(drawnItems);
 
-      // Initialize the draw control and pass it the FeatureGroup of editable layers
       const drawControl = new L.Control.Draw({
-        edit: {
-          featureGroup: drawnItems
-        },
+        edit: { featureGroup: drawnItems },
         draw: {
           polygon: false,
           polyline: false,
@@ -59,7 +65,6 @@ function ERA5DataDownloader() {
       });
       map.addControl(drawControl);
 
-      // Handle the created event to get the latitude and longitude of the drawn shape
       map.on(L.Draw.Event.CREATED, function (event) {
         const layer = event.layer;
         drawnItems.addLayer(layer);
@@ -67,33 +72,47 @@ function ERA5DataDownloader() {
         if (layer instanceof L.Marker) {
           setSelectedPoint(layer.getLatLng());
           setBoundingBox(null);
-          if (marker) {
-            marker.remove();
-          }
+          if (marker) marker.remove();
           const newMarker = L.marker(layer.getLatLng(), {icon: L.divIcon({className: 'custom-marker'})}).addTo(map);
           setMarker(newMarker);
         } else if (layer instanceof L.Rectangle) {
           const latlngs = layer.getLatLngs()[0];
           setBoundingBox(latlngs);
           setSelectedPoint(null);
-          if (marker) {
-            marker.remove();
-          }
+          if (marker) marker.remove();
         }
       });
     }
   }, [marker]);
 
-  const formatCoordinate = (coordinate) => {
-    return coordinate.toFixed(2);
-  };
+  const formatCoordinate = (coordinate) => coordinate.toFixed(2);
 
   const handleComponentChange = (event) => {
     setSelectedComponent(event.target.value);
+    setSelectedVariables([]);
   };
 
-  const handleTimeResolutionChange = (event) => {
-    setSelectedTimeResolution(event.target.value);
+  const handleTimeResolutionChange = (event) => setSelectedTimeResolution(event.target.value);
+  
+  const handleStartDateChange = (event) => setStartDate(event.target.value);
+
+  const handleEndDateChange = (event) => setEndDate(event.target.value);
+
+  const handleVariableChange = (event) => {
+    const variable = event.target.value;
+    const isChecked = event.target.checked;
+    setSelectedVariables((prevSelectedVariables) =>
+      isChecked ? [...prevSelectedVariables, variable] : prevSelectedVariables.filter((v) => v !== variable)
+    );
+  };
+
+  const generateCdsApiCode = () => {
+    let code = `import cdsapi\n\nc = cdsapi.Client()\n\nc.retrieve(\n    '${selectedComponent.toLowerCase()}',\n    {\n        'product_type': '${selectedTimeResolution}',\n`;
+    if (startDate && endDate) code += `        'date': '${startDate}/${endDate}',\n`;
+    if (selectedPoint) code += `        'area': [${formatCoordinate(selectedPoint.lat)}, ${formatCoordinate(selectedPoint.lng)}, ${formatCoordinate(selectedPoint.lat)}, ${formatCoordinate(selectedPoint.lng)}],\n`;
+    else if (boundingBox) code += `        'area': [${formatCoordinate(boundingBox[1].lat)}, ${formatCoordinate(boundingBox[0].lng)}, ${formatCoordinate(boundingBox[0].lat)}, ${formatCoordinate(boundingBox[2].lng)}],\n`;
+    code += `        'variable': [${selectedVariables.map((v) => `'${v}'`).join(', ')}]\n    },\n    'download.nc')`;
+    return code;
   };
 
   return (
@@ -134,12 +153,42 @@ function ERA5DataDownloader() {
               <option value="monthly">Monthly</option>
             </select>
           </div>
+          <div className="date-selector">
+            <label htmlFor="start-date">Start Date:</label>
+            <input type="date" id="start-date" value={startDate} onChange={handleStartDateChange} />
+            <label htmlFor="end-date">End Date:</label>
+            <input type="date" id="end-date" value={endDate} onChange={handleEndDateChange} />
+          </div>
         </div>
         <div className="component-details">
           <h3>Component Details</h3>
           <p><strong>Resolution:</strong> {components[selectedComponent].resolution}</p>
           <p><strong>Levels:</strong> {components[selectedComponent].levels}</p>
           <p><strong>Data Availability:</strong> {components[selectedComponent].dataAvailability}</p>
+        </div>
+        <div className="variable-selector">
+          <h3>Select Variables</h3>
+          {variables[selectedComponent] && variables[selectedComponent].map((variable) => (
+            <div key={variable}>
+              <label>
+                <input
+                  type="checkbox"
+                  value={variable}
+                  checked={selectedVariables.includes(variable)}
+                  onChange={handleVariableChange}
+                />
+                {variable}
+              </label>
+            </div>
+          ))}
+        </div>
+        <div className="api-code">
+          <h3>CDSAPI Code</h3>
+          <pre>
+            <code>
+              {generateCdsApiCode()}
+            </code>
+          </pre>
         </div>
       </div>
       <div id="map" className="map"></div>

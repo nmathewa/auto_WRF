@@ -27,6 +27,11 @@ function Home() {
             <p>Calculate running index for various datasets.</p>
             <Link to="/running-index-calculator" className="card-link">Go to Running Index Calculator</Link>
           </div>
+          <div className="card">
+            <h4>WRF Model Setup</h4>
+            <p>Configure and visualize WRF model parameters.</p>
+            <Link to="/WRF-model-setup" className="card-link">Go to WRF Model Setup</Link>
+          </div>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import GFSDataDownloader from './components/GFSDataDownloader';
 import ERA5DataDownloader from './components/ERA5DataDownloader';
 import RunningIndexCalculator from './components/RunningLayout';
 import Home from './components/Home';
+import WRFModelSetup from './components/WRFmodel/WRFModelSetup';
 
 function App() {
   return (
@@ -17,15 +18,6 @@ function App() {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/gfs-data-downloader">GFS Data Downloader</Link>
-              </li>
-              <li>
-                <Link to="/era5-data-downloader">ERA5 Data Downloader</Link>
-              </li>
-              <li>
-                <Link to="/running-index-calculator">Running Index Calculator</Link>
-              </li>
             </ul>
           </nav>
         </header>
@@ -35,6 +27,7 @@ function App() {
             <Route path="/gfs-data-downloader" element={<GFSDataDownloader />} />
             <Route path="/era5-data-downloader" element={<ERA5DataDownloader />} />
             <Route path="/running-index-calculator" element={<RunningIndexCalculator />} />
+            <Route path="/WRF-model-setup" element={<WRFModelSetup />} />
           </Routes>
         </main>
         <footer>

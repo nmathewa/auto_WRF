@@ -1,0 +1,310 @@
+Google Earth Engine
+
+owner
+No accessible repositories. Click Refresh to check again.
+writer
+No accessible repositories. Click Refresh to check again.
+reader
+No accessible repositories. Click Refresh to check again.
+archive
+No accessible repositories. Click Refresh to check again.
+Examples
+Image
+Image Collection
+Feature Collection
+Charts
+Arrays
+Primitive
+Cloud Masking
+Code Editor
+User Interface
+Datasets
+AAFC
+ACA
+AHN
+ASTER
+AU
+BIOPAMA
+BLM
+BNETD
+BNU
+CANADA
+CAS
+CGIAR
+CIESIN
+COPERNICUS
+CPOM
+CSIC
+CSIRO
+CSP
+DLR
+DOE
+ECMWF
+EDF
+EO1
+EPA
+ESA
+Estonia
+FAO
+FIRMS
+FORMA
+Finland
+GFW
+GLCF
+GLIMS
+GLOBAL_FLOOD_DB
+GOOGLE
+GRIDMET
+Germany
+HU_BERLIN
+HYCOM
+IDAHO_EPSCOR
+IGN
+IPCC
+ISDASOIL
+IUCN
+JAXA
+JCU
+JRC
+KNTU
+LANDFIRE
+LANDSAT
+LARSE
+Latvia
+MERIT
+MODIS
+NASA
+NASA_ASTER_GED_AG100_003
+NASA_EMIT_L1B_RAD
+NASA_EMIT_L2A_RFL
+NASA_EMIT_L2B_CH4ENH
+NASA_EMIT_L2B_CH4PLM
+NASA_FLDAS_NOAH01_C_GL_M_V001
+NASA_GDDP-CMIP6
+NASA_GEOS-CF_v1_fcst_htf
+NASA_GEOS-CF_v1_fcst_tavg1hr
+NASA_GEOS-CF_v1_rpl_htf
+NASA_GEOS-CF_v1_rpl_tavg1hr
+NASA_GIMMS_3GV0
+NASA_GLDAS_V021_NOAH_G025_T3H
+NASA_GLDAS_V022_CLSM_G025_DA1D
+NASA_GLDAS_V20_NOAH_G025_T3H
+NASA_GPM_L3_IMERG_MONTHLY_V06
+NASA_GPM_L3_IMERG_MONTHLY_V07
+NASA_GPM_L3_IMERG_V06
+NASA_GPM_L3_IMERG_V07
+NASA_GRACE_MASS_GRIDS_LAND
+NASA_GRACE_MASS_GRIDS_MASCON
+NASA_GRACE_MASS_GRIDS_MASCON_CRI
+NASA_GRACE_MASS_GRIDS_OCEAN
+NASA_GRACE_MASS_GRIDS_OCEAN_EOFR
+NASA_GRACE_MASS_GRIDS_V03_MASCON
+NASA_GRACE_MASS_GRIDS_V03_MASCON_CRI
+NASA_GRACE_MASS_GRIDS_V04_LAND
+NASA_GRACE_MASS_GRIDS_V04_MASCON
+NASA_GRACE_MASS_GRIDS_V04_MASCON_CRI
+NASA_GRACE_MASS_GRIDS_V04_OCEAN
+NASA_GSFC_MERRA_aer_2
+NASA_GSFC_MERRA_aer_nv_2
+NASA_GSFC_MERRA_flx_2
+NASA_GSFC_MERRA_lnd_2
+NASA_GSFC_MERRA_rad_2
+NASA_GSFC_MERRA_slv_2
+NASA_HLS_HLSL30_v002
+NASA_HLS_HLSS30_v002
+NASA_JPL_global_forest_canopy_height_2005
+NASA_LANCE_NOAA20_VIIRS_C2
+NASA_LANCE_SNPP_VIIRS_C2
+NASA_MEASURES_GFCC_TC_v3
+NASA_NASADEM_HGT_001
+NASA_NEX-DCP30
+NASA_NEX-DCP30_ENSEMBLE_STATS
+NASA_NEX-GDDP
+NASA_NLDAS_FORA0125_H002
+NASA_OCEANDATA_MODIS-Aqua_L3SMI
+NASA_OCEANDATA_MODIS-Terra_L3SMI
+NASA_OCEANDATA_SeaWiFS_L3SMI
+NASA_ORNL_DAYMET_V3
+NASA_ORNL_DAYMET_V4
+NASA_ORNL_biomass_carbon_density_v1
+NASA_ORNL_global_forest_classification_2020_V1
+NASA_SMAP_SPL3SMP_E_005
+NASA_SMAP_SPL3SMP_E_006
+NASA_SMAP_SPL4SMGP_007
+NASA_VIIRS_002_VNP09GA
+NASA_VIIRS_002_VNP09H1
+NASA_VIIRS_002_VNP13A1
+NASA_VIIRS_002_VNP14A1
+NASA_VIIRS_002_VNP15A2H
+NASA_VIIRS_002_VNP21A1D
+NASA_VIIRS_002_VNP21A1N
+This folder is empty.
+NASA_USDA
+NCEP_RE
+NOAA
+NRCan
+Netherlands
+OREGONSTATE
+OSU
+OpenET
+OpenLandMap
+Oxford
+RESOLVE
+RUB
+SKYSAT
+SNU
+Slovakia
+Spain
+Switzerland
+TERN
+TIGER
+TOMS
+TRMM
+TUBerlin
+Tsinghua
+UCSB-CHG
+UK
+UMD
+UMN
+UMT
+UN
+UQ
+USDA
+USDOS
+USFS
+USGS
+UTOKYO
+VITO
+WCMC
+WHBU
+WHRC
+WM
+WORLDCLIM
+WRI
+WWF
+WorldPop
+YALE
+forestdatapartnership
+gcp-public-data-weathernext
+global-pasture-watch
+neon-prod-earthengine
+ngis-cat
+planet-nicfi
+sat-io
+This folder is empty.
+Demos
+This tree is empty.
+
+Add a Project
+
+Cloud Assets
+ee-nalex2023
+This folder is empty.
+Legacy Assets
+You haven't uploaded any assets yet. Click "New" > "Home folder" to
+create a home folder and start uploading.
+NASA_GPM_L3_IMERG_MONTHLY_V06 *
+Get Link
+
+ 
+Save
+
+ 
+Run
+
+ 
+Reset
+
+ 
+Apps
+
+
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+// Select the mean precipitation over the time period
+var precipitation = dataset.select('precipitation').mean();
+// Crop to Maritime Continent region
+var region = ee.Geometry.Rectangle([90, -15, 150, 15]);
+precipitation = precipitation.clip(region);
+// Mask out low precipitation values
+//var mask = precipitation.gt(0.25);
+//precipitation = precipitation.updateMask(mask);
+// Define the Blues color palette
+var palette = [
+  'f7fbff', 'deebf7', 'c6dbef', '9ecae1', '6baed6',
+  '4292c6', '2171b5', '08519c', '08306b'
+];
+var precipitationVis = {min: 0.0, max: 1.5, palette: palette};
+// Add layer to map
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Click on the map to inspect the layers.
+
+Viewing 0 profiles, 0 from API calls and 0 from map tiles.
+
+←	Move left
+→	Move right
+↑	Move up
+↓	Move down
++	Zoom in
+-	Zoom out
+Home	Jump left by 75%
+End	Jump right by 75%
+Page Up	Jump up by 75%
+Page Down	Jump down by 75%
+
+To navigate, press the arrow keys.
+
+Geometry Imports
++ new layer
+_E_xit
+_D_elete
+P_o_int drawing._L_ine drawing._P_olygon drawing._R_ectangle
+drawing.Editing: Drag to move point.Editing: Drag to edit
+vertices.Editing: Drag to edit vertices.Editing: Drag to edit
+vertices.This geometry is locked.
+
+Learn MoreDismiss
+Layers
+
+Mean Precipitation (mm/hr)
+Map
+
+  * Terrain
+
+Satellite
+
+  * Labels
+
+Google
+ <https://maps.google.com/maps?ll=5.940371,112.139336&z=5&t=m&hl=en-
+US&gl=US&mapclient=apiv3>
+Keyboard shortcuts
+Map DataMap data ©2025 Google
+Map data ©2025 Google
+200 km 
+Click to toggle between metric and imperial units
+
+Terms <https://www.google.com/intl/en-US_US/help/terms_maps.html>
+Report a map error <https://www.google.com/maps/
+@5.9403706,112.1393356,5z/data=!10m1!1e1!12b1?source=apiv3&rapsrc=apiv3>
+Show Code
+Retry Authorization
